@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "835165431712",
+    "project_id": "carbometriclogin",
+    "storage_bucket": "carbometriclogin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835165431712:android:a1d5c5729fe111796fe6c5",
+        "android_client_info": {
+          "package_name": "com.radhikaagrawal.carbometricnew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhuPmG-m-dBtTHgpQ9kvW4Cf68IRnFvGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
