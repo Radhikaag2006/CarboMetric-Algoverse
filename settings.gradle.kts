@@ -1,3 +1,5 @@
+// ✅ Project-level build.gradle.kts
+// File: settings.gradle.kts
 pluginManagement {
     repositories {
         google {
@@ -10,7 +12,11 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("com.google.gms.google-services") version "4.4.0" apply false
+    }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +27,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "CarboMetric New"
 include(":app")
- 
