@@ -19,6 +19,7 @@
 
         <activity android:name=".TransportActivity" />
         <activity android:name=".EdiblesActivity" />
+        <activity android:name=".EcommerceActivity"/>
 
 
         <activity

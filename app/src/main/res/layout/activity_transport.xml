@@ -39,25 +39,7 @@
             android:textColor="#B8FF57"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
-
-        <!-- Mode of Transport -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mode of Transport"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="8dp" />
-
-        <EditText
-            android:id="@+id/etMode"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/edittext_background"
-            android:hint="e.g. Bus, Train"
-            android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#80FFFFFF"/>
+            android:layout_marginBottom="24dp" />
 
         <!-- Distance -->
         <TextView
@@ -65,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="Travel Distance (in km)"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="8dp" />
 
         <EditText
             android:id="@+id/etDistance"
@@ -76,7 +58,7 @@
             android:padding="12dp"
             android:background="@drawable/edittext_background"
             android:textColor="#FFFFFF"
-            android:textColorHint="#80FFFFFF"/>
+            android:textColorHint="#80FFFFFF" />
 
         <!-- Mode Selection -->
         <TextView
@@ -84,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="Mode Selection"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp" />
 
         <Spinner
             android:id="@+id/spinnerTransport"
@@ -93,14 +75,14 @@
             android:background="@drawable/edittext_background"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
         <!-- Travel Type -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="How did you travel?"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF" />
 
         <Spinner
             android:id="@+id/spinnerTravelType"
@@ -109,14 +91,14 @@
             android:background="@drawable/edittext_background"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp" />
 
         <!-- Date -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date of Travel"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/etDate"
@@ -128,14 +110,14 @@
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#80FFFFFF"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
         <!-- Time -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time of Travel"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/etTime"
@@ -147,7 +129,7 @@
             android:padding="12dp"
             android:textColor="#FFFFFF"
             android:textColorHint="#80FFFFFF"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp" />
 
         <!-- Submit Button -->
         <Button
@@ -160,7 +142,7 @@
             android:background="@drawable/button_background"
             android:layout_marginTop="8dp" />
 
-
     </LinearLayout>
 </ScrollView>
+
 

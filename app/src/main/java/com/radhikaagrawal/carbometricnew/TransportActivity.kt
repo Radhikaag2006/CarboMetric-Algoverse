@@ -22,7 +22,7 @@ class TransportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transport)
 
         // Initialize views
-        modeEditText = findViewById(R.id.etMode)
+      //  modeEditText = findViewById(R.id.etMode)
         distanceEditText = findViewById(R.id.etDistance)
         transportSpinner = findViewById(R.id.spinnerTransport)
         travelTypeSpinner = findViewById(R.id.spinnerTravelType)
