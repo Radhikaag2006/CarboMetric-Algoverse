@@ -16,7 +16,7 @@ class TransportActivity : AppCompatActivity() {
     private lateinit var dateEditText: EditText
     private lateinit var timeEditText: EditText
     private lateinit var submitButton: Button
-
+// comment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transport)
