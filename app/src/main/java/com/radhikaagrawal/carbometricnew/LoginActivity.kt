@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                         // Logged in, go to next screen
-                        startActivity(Intent(this, AddTransactionActivity::class.java))
+                        startActivity(Intent(this, NextDetailsFormActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
