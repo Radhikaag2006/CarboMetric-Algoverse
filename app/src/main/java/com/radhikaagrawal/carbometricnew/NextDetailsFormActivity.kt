@@ -10,12 +10,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class NextDetailsFormActivity : AppCompatActivity() {
 
-    private lateinit var etUsername: EditText
     private lateinit var etName: EditText
     private lateinit var etPhone: EditText
-    private lateinit var spinnerCountry: Spinner
-    private lateinit var spinnerState: Spinner
     private lateinit var btnSaveProfile: MaterialButton
+    private lateinit var userPreferences: UserPreferences
 
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
@@ -25,32 +23,21 @@ class NextDetailsFormActivity : AppCompatActivity() {
         setContentView(R.layout.activity_next_details_form)
 
         // Initialize Views
-        etUsername = findViewById(R.id.etUsername)
         etName = findViewById(R.id.etName)
         etPhone = findViewById(R.id.etPhone)
-        spinnerCountry = findViewById(R.id.spinnerItem1)
-        spinnerState = findViewById(R.id.spinnerItem2)
         btnSaveProfile = findViewById(R.id.btnSaveProfile)
+        userPreferences = UserPreferences(this)
 
-        // Setup Spinners
-        val countryList = listOf("Select Country", "India", "USA", "Canada")
-        val stateList = listOf("Select State", "Delhi", "California", "New York")
-
-        val countryAdapter = ArrayAdapter(
-            this,
-            R.layout.spinner_item,
-            R.id.spinnerItemText,
-            countryList
-        )
-        spinnerCountry.adapter = countryAdapter
-
-        val stateAdapter = ArrayAdapter(
-            this,
-            R.layout.spinner_item,
-            R.id.spinnerItemText,
-            stateList
-        )
-        spinnerState.adapter = stateAdapter
+        // Prefill name if available from signup
+        val userName = intent.getStringExtra("userName")
+        if (!userName.isNullOrEmpty()) {
+            etName.setText(userName)
+        } else {
+            // Try to get name from preferences
+            userPreferences.getUserName()?.let { name ->
+                etName.setText(name)
+            }
+        }
 
         // Save profile on button click
         btnSaveProfile.setOnClickListener {
@@ -58,44 +45,99 @@ class NextDetailsFormActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
+    override fun onBackPressed() {
+        // Instead of blocking, close the app
+        // When user reopens, they'll be forced to complete the form again
+        finishAffinity() // This closes the entire app task stack
+    }
+
     private fun saveProfile() {
-        val username = etUsername.text.toString().trim()
         val name = etName.text.toString().trim()
         val phone = etPhone.text.toString().trim()
-        val country = spinnerCountry.selectedItem.toString()
-        val state = spinnerState.selectedItem.toString()
         val uid = auth.currentUser?.uid
+        val email = auth.currentUser?.email
 
-        if (uid == null) {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
+        if (uid == null || email == null) {
+            Toast.makeText(this, "User not logged in properly", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (username.isEmpty() || name.isEmpty() || phone.isEmpty()
-            || country == "Select Country" || state == "Select State") {
-            Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
+        // Validate input fields
+        if (!isValidInput(name, phone)) {
             return
         }
 
         val userData = hashMapOf(
-            "username" to username,
             "name" to name,
             "phone" to phone,
-            "country" to country,
-            "state" to state,
-            "uid" to uid
+            "email" to email,
+            "uid" to uid,
+            "createdAt" to com.google.firebase.Timestamp.now()
         )
+
+        // Show loading state
+        btnSaveProfile.isEnabled = false
+        btnSaveProfile.text = "Saving..."
 
         db.collection("users").document(uid)
             .set(userData)
             .addOnSuccessListener {
-                Toast.makeText(this, "Profile saved!", Toast.LENGTH_SHORT).show()
+                // Mark that user has completed their profile details
+                userPreferences.setHasCompletedDetails(true)
+                userPreferences.setUserName(name) // Update the name in preferences
+
+                Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, AddTransactionActivity::class.java)
                 startActivity(intent)
                 finish() // finish this activity to prevent going back with back button
             }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to save: ${it.message}", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { exception ->
+                // Reset button state
+                btnSaveProfile.isEnabled = true
+                btnSaveProfile.text = "Save Profile"
+
+                Toast.makeText(this, "Failed to save profile: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun isValidInput(name: String, phone: String): Boolean {
+        // Validate name
+        if (name.isEmpty()) {
+            etName.error = "Name is required"
+            etName.requestFocus()
+            return false
+        }
+
+        if (name.length < 2) {
+            etName.error = "Name must be at least 2 characters"
+            etName.requestFocus()
+            return false
+        }
+
+        if (!name.matches(Regex("^[a-zA-Z\\s]+$"))) {
+            etName.error = "Name can only contain letters and spaces"
+            etName.requestFocus()
+            return false
+        }
+
+        // Validate phone
+        if (phone.isEmpty()) {
+            etPhone.error = "Phone number is required"
+            etPhone.requestFocus()
+            return false
+        }
+
+        if (!phone.matches(Regex("^[+]?[0-9]{10,15}$"))) {
+            etPhone.error = "Please enter a valid phone number (10-15 digits)"
+            etPhone.requestFocus()
+            return false
+        }
+
+        // Clear any existing errors
+        etName.error = null
+        etPhone.error = null
+
+        return true
     }
 }

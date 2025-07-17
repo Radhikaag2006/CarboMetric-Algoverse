@@ -9,12 +9,14 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var userPreferences: UserPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        userPreferences = UserPreferences(this)
 
         val emailEditText = findViewById<EditText>(R.id.emailInput)
         val passwordEditText = findViewById<EditText>(R.id.passwordInput)
@@ -32,13 +34,28 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        // Save login state and user information
+                        userPreferences.setLoggedIn(true)
+                        userPreferences.setUserEmail(email)
+
+                        // Get user name from Firebase if available, otherwise use email
+                        val currentUser = auth.currentUser
+                        val userName = currentUser?.displayName ?: email.substringBefore("@")
+                        userPreferences.setUserName(userName)
+
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                        // Logged in, go to next screen
-                        startActivity(Intent(this, NextDetailsFormActivity::class.java))
+
+                        // Check if user has completed details form
+                        if (userPreferences.hasCompletedDetails()) {
+                            // Go directly to AddTransactionActivity
+                            startActivity(Intent(this, AddTransactionActivity::class.java))
+                        } else {
+                            // Go to NextDetailsFormActivity to complete profile
+                            startActivity(Intent(this, NextDetailsFormActivity::class.java))
+                        }
                         finish()
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-
                     }
                 }
         }
