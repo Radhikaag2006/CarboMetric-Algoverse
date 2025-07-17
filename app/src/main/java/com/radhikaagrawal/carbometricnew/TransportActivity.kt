@@ -5,7 +5,10 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 import java.util.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FieldValue
 
 class TransportActivity : AppCompatActivity() {
 
@@ -22,7 +25,7 @@ class TransportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transport)
 
         // Initialize views
-      //  modeEditText = findViewById(R.id.etMode)
+       // modeEditText = findViewById(R.id.etMode)
         distanceEditText = findViewById(R.id.etDistance)
         transportSpinner = findViewById(R.id.spinnerTransport)
         travelTypeSpinner = findViewById(R.id.spinnerTravelType)
@@ -66,20 +69,122 @@ class TransportActivity : AppCompatActivity() {
 
         // Submit Button Click
         submitButton.setOnClickListener {
-            val mode = modeEditText.text.toString().trim()
+           // val mode = modeEditText.text.toString().trim()
             val distance = distanceEditText.text.toString().trim()
             val selectedTransport = transportSpinner.selectedItem.toString()
             val selectedTravelType = travelTypeSpinner.selectedItem.toString()
             val date = dateEditText.text.toString().trim()
             val time = timeEditText.text.toString().trim()
 
-            if (mode.isEmpty() || distance.isEmpty() || selectedTransport == "Select Mode" ||
+            if (distance.isEmpty() || selectedTransport == "Select Mode" ||
                 selectedTravelType == "Select Option" || date.isEmpty() || time.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Transport info submitted", Toast.LENGTH_SHORT).show()
-                // Database or navigation logic goes here
+                // Calculate the emission amount
+                val emissionFactor = getEmissionFactor(selectedTransport)
+                val distanceKm = distance.toDoubleOrNull() ?: 0.0
+                val amount = emissionFactor * distanceKm
+
+                // Determine emission level
+                val level = getEmissionLevel(selectedTransport, amount)
+
+                // Convert date and time to ISO format
+                val emissionDate = convertToISO(date, time)
+
+                // Prepare Firestore data
+                val db = FirebaseFirestore.getInstance()
+                val transportData = hashMapOf(
+                    "userId" to "user_001", // Replace with actual user id logic if available
+                    "category" to "TRANSPORT",
+                    "amount" to amount,
+                    "emissionDate" to emissionDate,
+                    "level" to level,
+                    "details" to hashMapOf(
+                        "mode" to selectedTransport.uppercase(),
+                        "distanceKm" to distanceKm,
+                        "travelType" to selectedTravelType.uppercase(),
+                        //"notes" to mode
+                    ),
+                    "createdAt" to FieldValue.serverTimestamp(),
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+
+                db.collection("emissions")
+                    .add(transportData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Transport info saved!", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error saving data: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
+        }
+    }
+
+    // Lookup table for emission factor (kg CO2 per km)
+    private fun getEmissionFactor(mode: String): Double {
+        return when (mode.uppercase()) {
+            "CAR" -> 0.192
+            "METRO" -> 0.041
+            "TRAIN" -> 0.045
+            "BIKE" -> 0.016
+            "BUS" -> 0.105
+            "AEROPLANE" -> 0.255
+            else -> 0.0
+        }
+    }
+
+    // Emission level logic
+    private fun getEmissionLevel(mode: String, amount: Double): String {
+        return when (mode.uppercase()) {
+            "CAR" -> when {
+                amount < 2 -> "LOW"
+                amount < 10 -> "MEDIUM"
+                amount < 30 -> "HIGH"
+                else -> "EXTREME"
+            }
+            "METRO", "TRAIN" -> when {
+                amount < 1 -> "LOW"
+                amount < 5 -> "MEDIUM"
+                amount < 10 -> "HIGH"
+                else -> "EXTREME"
+            }
+            "BIKE" -> when {
+                amount < 0.5 -> "LOW"
+                amount < 2 -> "MEDIUM"
+                amount < 5 -> "HIGH"
+                else -> "EXTREME"
+            }
+            "BUS" -> when {
+                amount < 1 -> "LOW"
+                amount < 5 -> "MEDIUM"
+                amount < 15 -> "HIGH"
+                else -> "EXTREME"
+            }
+            "AEROPLANE" -> when {
+                amount < 10 -> "LOW"
+                amount < 50 -> "MEDIUM"
+                amount < 100 -> "HIGH"
+                else -> "EXTREME"
+            }
+            else -> "LOW"
+        }
+    }
+
+    // Converts date ("dd/MM/yyyy") and time ("HH:mm") to ISO 8601 string ("yyyy-MM-ddTHH:mm:ssZ")
+    private fun convertToISO(date: String, time: String): String {
+        return try {
+            val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+            inputFormat.timeZone = TimeZone.getDefault()
+            val dateObj = inputFormat.parse("$date $time")
+            outputFormat.timeZone = TimeZone.getTimeZone("UTC")
+            outputFormat.format(dateObj ?: Date())
+        } catch (e: Exception) {
+            // fallback: current UTC time
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+                .apply { timeZone = TimeZone.getTimeZone("UTC") }
+                .format(Date())
         }
     }
 }
