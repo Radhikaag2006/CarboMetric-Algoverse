@@ -1,5 +1,3 @@
-// ✅ Project-level build.gradle.kts
-// File: settings.gradle.kts
 pluginManagement {
     repositories {
         google {
@@ -22,6 +20,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io") // ✅ Add this to support AnyChart
     }
 }
 

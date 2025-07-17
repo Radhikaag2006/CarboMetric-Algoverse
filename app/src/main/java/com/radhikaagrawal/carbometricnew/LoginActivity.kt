@@ -32,12 +32,13 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Login successful: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                         // Logged in, go to next screen
-                        startActivity(Intent(this, NextDetailsFormActivity::class.java))
+                        startActivity(Intent(this, AddTransactionActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+
                     }
                 }
         }

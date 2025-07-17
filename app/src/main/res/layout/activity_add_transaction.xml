@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D0D0D"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search category..."
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:background="@drawable/search_background"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:inputType="text" />
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select your category"
+            android:textAlignment="center"
+            android:textColor="#A4FFB5"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Rounded Buttons -->
+        <Button
+            android:id="@+id/btnTransport"
+            style="@style/ModernCategoryButton"
+            android:text="Transport" />
+
+        <Button
+            android:id="@+id/btnEcommerce"
+            style="@style/ModernCategoryButton"
+            android:text="Ecommerce" />
+
+        <Button
+            android:id="@+id/btnElectricity"
+            style="@style/ModernCategoryButton"
+            android:text="Electricity" />
+
+        <Button
+            android:id="@+id/btnEdibles"
+            style="@style/ModernCategoryButton"
+            android:text="Edibles" />
+
+    </LinearLayout>
+</ScrollView>
