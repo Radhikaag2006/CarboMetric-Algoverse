@@ -69,3 +69,5 @@ configurations.all {
     exclude(group = "com.android.support", module = "support-vector-drawable")
     exclude(group = "com.android.support", module = "versionedparcelable")
 }
+
+apply(plugin = "com.google.gms.google-services")
