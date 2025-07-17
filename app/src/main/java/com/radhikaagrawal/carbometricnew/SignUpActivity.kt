@@ -77,10 +77,17 @@ class SignUpActivity : AppCompatActivity() {
 
                         Toast.makeText(this, "Welcome, $fullName!", Toast.LENGTH_SHORT).show()
 
-                        // ✅ Navigate to UserNextDetailsActivity
-                        val intent = Intent(this, NextDetailsFormActivity::class.java)
-                        intent.putExtra("userName", fullName)
-                        startActivity(intent)
+                        // Check if user has completed details form
+                        if (userPreferences.hasCompletedDetails()) {
+                            // Go directly to AddTransactionActivity
+                            val intent = Intent(this, AddTransactionActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            // Go to NextDetailsFormActivity to complete profile
+                            val intent = Intent(this, NextDetailsFormActivity::class.java)
+                            intent.putExtra("userName", fullName)
+                            startActivity(intent)
+                        }
                         finish()
                     } else {
                         Toast.makeText(this, "Signup failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
