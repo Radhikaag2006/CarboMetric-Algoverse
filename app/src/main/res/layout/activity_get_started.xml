@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000"
     android:padding="24dp">
 
@@ -18,16 +19,21 @@
         android:textStyle="bold"
         android:fontFamily="@font/manrope_light"/>
 
-    <Button
-        android:id="@+id/getStartedBtn"
-        android:layout_width="332dp"
-        android:layout_height="71dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="215dp"
-        android:backgroundTint="#A3D644"
-        android:fontFamily="@font/manrope_light"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGetStarted"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="450dp"
         android:text="Get Started"
-        android:textColor="#000000"
-        android:textSize="30sp" />
+        android:fontFamily="@font/manrope_light"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:cornerRadius="12dp"
+        app:backgroundTint="#C2E65C"
+        android:layout_centerHorizontal="true"
+        app:strokeWidth="2dp"
+        android:elevation="2dp" />
+
+
 
 </RelativeLayout>

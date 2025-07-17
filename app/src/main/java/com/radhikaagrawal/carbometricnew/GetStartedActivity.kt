@@ -7,24 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class GetStartedActivity : AppCompatActivity() {
-
-    private lateinit var getStartedButton: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_started)
 
-        getStartedButton = findViewById(R.id.getStartedBtn)
-
-        getStartedButton.setOnClickListener {
-            val currentUser = FirebaseAuth.getInstance().currentUser
-            if (currentUser == null) {
-                // New user
-                startActivity(Intent(this, SignUpActivity::class.java))
-            } else {
-                // Existing user
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
+        // Assume you go to ChoiceActivity after pressing a button
+        val getStartedBtn: Button = findViewById(R.id.btnGetStarted)
+        getStartedBtn.setOnClickListener {
+            startActivity(Intent(this, AddTransactionActivity::class.java))
             finish()
         }
     }
