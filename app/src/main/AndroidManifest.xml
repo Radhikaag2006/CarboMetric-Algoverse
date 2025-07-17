@@ -16,6 +16,9 @@
         <activity
             android:name=".AddTransactionActivity"
             android:exported="false" />
+
+        <activity android:name=".TransportActivity" />
+
         <activity
             android:name=".NextDetailsFormActivity"
             android:exported="false" />
