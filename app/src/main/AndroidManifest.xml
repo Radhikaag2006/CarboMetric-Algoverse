@@ -18,6 +18,8 @@
             android:exported="false" />
 
         <activity android:name=".TransportActivity" />
+        <activity android:name=".EdiblesActivity" />
+
 
         <activity
             android:name=".NextDetailsFormActivity"

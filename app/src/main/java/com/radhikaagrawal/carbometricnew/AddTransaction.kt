@@ -20,9 +20,9 @@ class AddTransactionActivity : AppCompatActivity() {
             startActivity(Intent(this, TransportActivity::class.java))
         }
 
-        btnEcommerce.setOnClickListener {
+       /* btnEcommerce.setOnClickListener {
             startActivity(Intent(this, EcommerceActivity::class.java))
-        }
+        }*/
 
         btnElectricity.setOnClickListener {
             startActivity(Intent(this, ElectricityActivity::class.java))
