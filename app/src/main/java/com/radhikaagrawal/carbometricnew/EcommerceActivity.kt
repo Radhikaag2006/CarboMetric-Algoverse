@@ -38,7 +38,7 @@ class EcommerceActivity : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             val datePicker = DatePickerDialog(this, { _, year, month, day ->
                 val formatted = "${day.toString().padStart(2, '0')}/" +
-                        "${(month + 1).toString().padStart(2, '0')}/$year"
+                        "${(month + 1).toString().padStart(2, '0')}/$year"// comment
                 dateEditText.setText(formatted)
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
             datePicker.show()

@@ -35,7 +35,7 @@ class EdiblesActivity : AppCompatActivity() {
         etTime.setOnClickListener {
             val c = Calendar.getInstance()
             TimePickerDialog(this, { _, h, min ->
-                etTime.setText(String.format("%02d:%02d", h, min))
+                etTime.setText(String.format("%02d:%02d", h, min)) // comment
             }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show()
         }
 
