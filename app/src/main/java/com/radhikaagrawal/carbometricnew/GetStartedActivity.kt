@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 
 class GetStartedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +13,7 @@ class GetStartedActivity : AppCompatActivity() {
         // Assume you go to ChoiceActivity after pressing a button
         val getStartedBtn: Button = findViewById(R.id.btnGetStarted)
         getStartedBtn.setOnClickListener {
-            startActivity(Intent(this, AddTransactionActivity::class.java))
+            startActivity(Intent(this, SignupAndLogin::class.java))
             finish()
         }
     }

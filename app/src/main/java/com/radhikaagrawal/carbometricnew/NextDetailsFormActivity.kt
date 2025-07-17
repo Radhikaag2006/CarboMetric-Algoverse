@@ -39,7 +39,7 @@ class NextDetailsFormActivity : AppCompatActivity() {
         val countryAdapter = ArrayAdapter(
             this,
             R.layout.spinner_item,
-            R.id.spinnerText,
+            R.id.spinnerItemText,
             countryList
         )
         spinnerCountry.adapter = countryAdapter
@@ -47,7 +47,7 @@ class NextDetailsFormActivity : AppCompatActivity() {
         val stateAdapter = ArrayAdapter(
             this,
             R.layout.spinner_item,
-            R.id.spinnerText,
+            R.id.spinnerItemText,
             stateList
         )
         spinnerState.adapter = stateAdapter
