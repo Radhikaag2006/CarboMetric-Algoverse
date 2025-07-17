@@ -24,11 +24,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please complete your profile\nto continue."
+            android:text="Complete Your Profile"
             android:textColor="#D0FFA0"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_light"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please provide your details to continue"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:fontFamily="@font/manrope_light"/>
 
@@ -36,95 +46,66 @@
             android:layout_width="100dp"
             android:layout_height="2dp"
             android:background="#CBFF9F"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="16dp" />
 
-        <EditText
-            android:id="@+id/etUsername"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:hint="Username"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#808080"
-            android:background="@drawable/edit_text_bg"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/manrope_light"/>
-
-        <!-- Name -->
+        <!-- Name Field -->
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:hint="Name"
-            android:textColor="#FFFFFF"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:hint="Full Name"
+            android:inputType="textPersonName|textCapWords"
+            android:textColor="#000000"
             android:textColorHint="#808080"
             android:background="@drawable/edit_text_bg"
             android:paddingHorizontal="16dp"
-            android:fontFamily="@font/manrope_light"/>
+            android:fontFamily="@font/manrope_light"
+            android:maxLines="1"
+            android:imeOptions="actionNext"/>
 
-        <!-- Phone -->
+        <!-- Phone Field -->
         <EditText
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:hint="Phone No."
+            android:hint="Phone Number"
             android:inputType="phone"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textColorHint="#808080"
             android:background="@drawable/edit_text_bg"
             android:paddingHorizontal="16dp"
-            android:fontFamily="@font/manrope_light"/>
-
-        <!-- Country Label -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Country"
-            android:textColor="#D0FFA0"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/manrope_light" />
-
-        <Spinner
-            android:id="@+id/spinnerItem1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edit_text_bg"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/manrope_light"/>
-
-        <!-- State Label -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="State"
-            android:textColor="#D0FFA0"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/manrope_light" />
-
-        <Spinner
-            android:id="@+id/spinnerItem2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edit_text_bg"
-            android:paddingHorizontal="16dp"
-            android:fontFamily="@font/manrope_light"/>
+            android:fontFamily="@font/manrope_light"
+            android:maxLines="1"
+            android:imeOptions="actionDone"/>
 
         <!-- Save Profile Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSaveProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/button_background"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="#FFFFFF"
             android:elevation="2dp"
             android:fontFamily="@font/manrope_light"
             android:text="Save Profile"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:backgroundTint="@null" />
+
+        <!-- Info Text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This information is required to proceed"
+            android:textColor="#808080"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:fontFamily="@font/manrope_light"/>
 
     </LinearLayout>
 </ScrollView>

@@ -17,6 +17,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var signUpBtn: Button
     private lateinit var togglePasswordIcon: ImageView
     private lateinit var auth: FirebaseAuth
+    private lateinit var userPreferences: UserPreferences
 
     private var isPasswordVisible = false
 
@@ -31,6 +32,7 @@ class SignUpActivity : AppCompatActivity() {
         signUpBtn = findViewById(R.id.signUpBtn)
         togglePasswordIcon = findViewById(R.id.togglePasswordVisibility)
         auth = FirebaseAuth.getInstance()
+        userPreferences = UserPreferences(this)
 
         // 🔐 Toggle password visibility
         togglePasswordIcon.setOnClickListener {
@@ -67,6 +69,12 @@ class SignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        // Save login state and user information
+                        userPreferences.setLoggedIn(true)
+                        userPreferences.setUserEmail(email)
+                        userPreferences.setUserName(fullName)
+                        userPreferences.setHasCompletedDetails(false)
+
                         Toast.makeText(this, "Welcome, $fullName!", Toast.LENGTH_SHORT).show()
 
                         // ✅ Navigate to UserNextDetailsActivity
