@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                         // Check if user has completed details form
                         if (userPreferences.hasCompletedDetails()) {
                             // Go directly to AddTransactionActivity
-                            startActivity(Intent(this, AddTransactionActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                         } else {
                             // Go to NextDetailsFormActivity to complete profile
                             startActivity(Intent(this, NextDetailsFormActivity::class.java))

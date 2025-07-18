@@ -88,7 +88,7 @@ class NextDetailsFormActivity : AppCompatActivity() {
                 userPreferences.setUserName(name) // Update the name in preferences
 
                 Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, AddTransactionActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish() // finish this activity to prevent going back with back button
             }

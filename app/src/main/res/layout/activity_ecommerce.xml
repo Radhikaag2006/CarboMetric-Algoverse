@@ -40,7 +40,7 @@
             android:layout_height="48dp"
             android:background="@drawable/edittext_background"
             android:layout_marginBottom="16dp"
-            android:popupBackground="#000000"
+            android:popupBackground="#FFFFFF"
             android:spinnerMode="dropdown"
             android:padding="8dp"
             android:textColor="#FFFFFF" />
@@ -109,7 +109,7 @@
             android:text=" Submit "
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_background"
+            android:background="@drawable/rounded_button_green"
             android:layout_marginTop="8dp" />
 
     </LinearLayout>

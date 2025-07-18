@@ -32,27 +32,36 @@
         android:id="@+id/carbonWalletTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/manrope_light"
         android:text="Your Carbon Wallet"
-        android:textColor="#A2FFF5"
-        android:textSize="32sp"
+        android:textColor="#E2FFA2"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/backButton"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
-    <!-- User Profile Row -->
+
+    <!-- Emissions Stats -->
+
+    <!-- Emission streak (use GridLayout for colored squares) -->
+
     <LinearLayout
         android:id="@+id/profileRow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/carbonWalletTitle"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/carbonWalletTitle">
 
         <!-- Profile Icon -->
+
+        <!-- User Name -->
         <ImageView
             android:id="@+id/profileIcon"
             android:layout_width="40dp"
@@ -60,89 +69,88 @@
             android:src="@drawable/person"
             app:tint="#FFFFFF" />
 
-        <!-- User Name -->
+        <!-- Color Code Icon (dynamically set) -->
+
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/manrope_light"
             android:text="Josie Matthew"
             android:textColor="#FFF"
-            android:textSize="20sp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"/>
+            android:textSize="20sp" />
 
-        <!-- Color Code Icon (dynamically set) -->
         <View
             android:id="@+id/userColorCode"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/rounded_color_square"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/rounded_color_square" />
 
-        <!-- Leaderboard Icon -->
-        <ImageView
-            android:id="@+id/leaderboardIcon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/leaderboard"
-            app:tint="#FFF"
-            android:layout_marginStart="8dp"/>
+
     </LinearLayout>
 
-    <!-- Emissions Stats -->
     <LinearLayout
         android:id="@+id/emissionsStats"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/profileRow"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileRow">
 
         <!-- Emissions today -->
         <TextView
             android:id="@+id/emissionsToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12 emissions today"
-            android:textColor="#FFF"
-            android:textSize="18sp"
-            android:background="#F5C2C2"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginBottom="8dp"
+            android:background="#FDCDCD"
+            android:fontFamily="@font/manrope_light"
+            android:padding="8dp"
+            android:text="12 emissions today"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
         <!-- Emissions made this month -->
         <TextView
             android:id="@+id/emissionsMadeMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="46 emissions made this month"
-            android:textColor="#FFF"
-            android:textSize="18sp"
-            android:background="#B7D0F5"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginBottom="8dp"
+            android:background="#BDF2FF"
+            android:fontFamily="@font/manrope_light"
+            android:padding="8dp"
+            android:text="46 emissions made this month"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
         <!-- Emissions this year -->
         <TextView
             android:id="@+id/emissionsYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="514 emissions this year"
-            android:textColor="#A2FFF5"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"/>
+            android:fontFamily="@font/manrope_light"
+            android:text="514 emissions this year"
+            android:textColor="#D8FFAD"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Emission streak (use GridLayout for colored squares) -->
     <GridLayout
         android:id="@+id/emissionStreak"
         android:layout_width="0dp"
@@ -155,20 +163,26 @@
         android:layout_marginTop="8dp"/>
 
     <!-- Hourly Report Label -->
+
+    <!--here-->
+
+    <!-- MPAndroidChart Bar+Line Chart -->
+
     <TextView
         android:id="@+id/hourlyReportLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/manrope_light"
         android:text="Your hourly report"
         android:textColor="#A2FFF5"
+
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/emissionStreak"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/emissionStreak" />
 
-    <!-- MPAndroidChart Bar+Line Chart -->
     <com.github.mikephil.charting.charts.CombinedChart
         android:id="@+id/barLineChart"
         android:layout_width="0dp"
@@ -182,6 +196,7 @@
     <!-- Bottom Navigation (Placeholder, customize as needed) -->
     <LinearLayout
         android:id="@+id/bottomNav"
+
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:orientation="horizontal"
@@ -193,13 +208,14 @@
 
         <!-- Home Button -->
         <ImageButton
+
             android:id="@+id/homeButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/home_icon"
             android:background="@android:color/transparent"
             app:tint="#A2FFF5"
-            android:layout_margin="8dp"/>
+            android:layout_margin="16dp"/>
 
         <!-- Add Button -->
         <ImageButton
@@ -214,6 +230,7 @@
         <!-- Center Button (Globe) -->
         <ImageButton
             android:id="@+id/centerButton"
+            android:scaleType="fitCenter"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@drawable/chatbot_logo"

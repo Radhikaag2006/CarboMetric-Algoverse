@@ -2,6 +2,7 @@ package com.radhikaagrawal.carbometricnew
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -113,6 +114,11 @@ class TransportActivity : AppCompatActivity() {
                     .add(transportData)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Transport info saved!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(this, "Error saving data: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -188,3 +194,4 @@ class TransportActivity : AppCompatActivity() {
         }
     }
 }
+
