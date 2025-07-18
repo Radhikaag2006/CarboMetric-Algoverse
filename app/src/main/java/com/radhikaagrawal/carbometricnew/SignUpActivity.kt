@@ -80,7 +80,7 @@ class SignUpActivity : AppCompatActivity() {
                         // Check if user has completed details form
                         if (userPreferences.hasCompletedDetails()) {
                             // Go directly to AddTransactionActivity
-                            val intent = Intent(this, AddTransactionActivity::class.java)
+                            val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                         } else {
                             // Go to NextDetailsFormActivity to complete profile

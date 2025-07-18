@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Pressed state: deeper sage green -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#9CAF88" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Disabled state: pale yellow -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFF9C4" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Default state: light sage -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#DCE2C8" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
 </selector>

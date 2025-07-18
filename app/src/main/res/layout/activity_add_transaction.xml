@@ -6,6 +6,7 @@
     android:padding="16dp">
 
     <LinearLayout
+        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -14,12 +15,13 @@
         <EditText
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:hint="Search category..."
             android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#AAAAAA"
-            android:background="@drawable/search_background"
+            android:fontFamily="@font/manrope_light"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:background="@drawable/rounded_button_green"
             android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="8dp"
             android:inputType="text" />
@@ -30,29 +32,38 @@
             android:layout_height="wrap_content"
             android:text="Select your category"
             android:textAlignment="center"
-            android:textColor="#A4FFB5"
-            android:textSize="20sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="#D9FFA4"
+            android:textSize="24sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/manrope_light"
+            android:layout_marginBottom="24dp"/>
 
         <!-- Rounded Buttons -->
         <Button
             android:id="@+id/btnTransport"
             style="@style/ModernCategoryButton"
+            android:background="@drawable/rounded_button_green"
+            android:layout_marginTop="20dp"
             android:text="Transport" />
 
         <Button
             android:id="@+id/btnEcommerce"
+            android:layout_marginTop="20dp"
             style="@style/ModernCategoryButton"
+            android:background="@drawable/rounded_button_green"
             android:text="Ecommerce" />
 
         <Button
             android:id="@+id/btnElectricity"
             style="@style/ModernCategoryButton"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button_green"
             android:text="Electricity" />
 
         <Button
             android:id="@+id/btnEdibles"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button_green"
             style="@style/ModernCategoryButton"
             android:text="Edibles" />
 

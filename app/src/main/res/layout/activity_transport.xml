@@ -57,7 +57,7 @@
             android:hint="Enter distance"
             android:padding="12dp"
             android:background="@drawable/edittext_background"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textColorHint="#80FFFFFF" />
 
         <!-- Mode Selection -->
@@ -139,7 +139,7 @@
             android:text=" Submit "
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_background"
+            android:background="@drawable/rounded_button_green"
             android:layout_marginTop="8dp" />
 
     </LinearLayout>
