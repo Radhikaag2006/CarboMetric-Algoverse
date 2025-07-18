@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class EcommerceActivity : AppCompatActivity() {
@@ -14,10 +15,14 @@ class EcommerceActivity : AppCompatActivity() {
     private lateinit var dateEditText: EditText
     private lateinit var timeEditText: EditText
     private lateinit var submitButton: Button
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ecommerce)
+
+        // Initialize Firestore
+        db = FirebaseFirestore.getInstance()
 
         // Initialize views
         categorySpinner = findViewById(R.id.spinnerCategory)
@@ -38,7 +43,7 @@ class EcommerceActivity : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             val datePicker = DatePickerDialog(this, { _, year, month, day ->
                 val formatted = "${day.toString().padStart(2, '0')}/" +
-                        "${(month + 1).toString().padStart(2, '0')}/$year"// comment
+                        "${(month + 1).toString().padStart(2, '0')}/$year"
                 dateEditText.setText(formatted)
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
@@ -66,9 +71,40 @@ class EcommerceActivity : AppCompatActivity() {
                 date.isEmpty() || time.isEmpty()) {
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "E-commerce data submitted", Toast.LENGTH_SHORT).show()
-                // Add Firestore or local storage logic here
+                // Emission level logic for e-commerce
+                val rating = getEcommerceEmissionLevel(category, purchaseType)
+
+                // Prepare data to send to Firestore
+                val ecommerceData = hashMapOf(
+                    "category" to category,
+                    "purchaseType" to purchaseType,
+                    "date" to date,
+                    "time" to time,
+                    "type" to "E-COMMERCE", // ALL CAPS
+                    "rating" to rating
+                )
+
+                db.collection("emissions")
+                    .add(ecommerceData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "E-commerce data submitted to Firestore!", Toast.LENGTH_SHORT).show()
+                        // Optionally, clear fields or finish activity
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed to submit: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
+        }
+    }
+
+    // Emission level logic for e-commerce
+    private fun getEcommerceEmissionLevel(category: String, purchaseType: String): String {
+        return when (category.uppercase()) {
+            "ELECTRONIC GADGETS", "FURNITURE" ->
+                if (purchaseType.uppercase() == "ORDERED") "HIGH" else "MEDIUM"
+            "APPARELS" -> "MEDIUM"
+            "STATIONARY" -> "LOW"
+            else -> "MEDIUM"
         }
     }
 }

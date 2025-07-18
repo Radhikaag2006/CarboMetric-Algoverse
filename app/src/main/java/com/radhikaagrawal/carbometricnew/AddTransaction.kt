@@ -17,8 +17,8 @@ class AddTransactionActivity : AppCompatActivity() {
         val btnEdibles = findViewById<Button>(R.id.btnEdibles)
 
         btnTransport.setOnClickListener {
-            startActivity(Intent(this, TransportActivity::class.java))
-        }
+            startActivity(Intent(this, TransportActivity::class.java)) }
+
 
         btnEcommerce.setOnClickListener {
             startActivity(Intent(this, EcommerceActivity::class.java))

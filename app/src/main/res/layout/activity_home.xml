@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Top Bar -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <ImageButton
+        android:id="@+id/logoutButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logout"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Wallet Title -->
+    <TextView
+        android:id="@+id/carbonWalletTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Carbon Wallet"
+        android:textColor="#A2FFF5"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- User Profile Row -->
+    <LinearLayout
+        android:id="@+id/profileRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/carbonWalletTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
+
+        <!-- Profile Icon -->
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/person"
+            app:tint="#FFFFFF" />
+
+        <!-- User Name -->
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Josie Matthew"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Color Code Icon (dynamically set) -->
+        <View
+            android:id="@+id/userColorCode"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/rounded_color_square"
+            android:layout_marginStart="8dp"/>
+
+        <!-- Leaderboard Icon -->
+        <ImageView
+            android:id="@+id/leaderboardIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/leaderboard"
+            app:tint="#FFF"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Emissions Stats -->
+    <LinearLayout
+        android:id="@+id/emissionsStats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/profileRow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
+
+        <!-- Emissions today -->
+        <TextView
+            android:id="@+id/emissionsToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 emissions today"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:background="#F5C2C2"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <!-- Emissions made this month -->
+        <TextView
+            android:id="@+id/emissionsMadeMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="46 emissions made this month"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:background="#B7D0F5"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <!-- Emissions this year -->
+        <TextView
+            android:id="@+id/emissionsYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="514 emissions this year"
+            android:textColor="#A2FFF5"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
+
+    <!-- Emission streak (use GridLayout for colored squares) -->
+    <GridLayout
+        android:id="@+id/emissionStreak"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:columnCount="14"
+        app:layout_constraintTop_toBottomOf="@id/emissionsStats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Hourly Report Label -->
+    <TextView
+        android:id="@+id/hourlyReportLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your hourly report"
+        android:textColor="#A2FFF5"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/emissionStreak"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- MPAndroidChart Bar+Line Chart -->
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/barLineChart"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toBottomOf="@id/hourlyReportLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"/>
+
+    <!-- Bottom Navigation (Placeholder, customize as needed) -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black"
+        android:gravity="center">
+
+        <!-- Home Button -->
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/home_icon"
+            android:background="@android:color/transparent"
+            app:tint="#A2FFF5"
+            android:layout_margin="8dp"/>
+
+        <!-- Add Button -->
+        <ImageButton
+            android:id="@+id/addButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/add_icon"
+            android:background="@android:color/transparent"
+            app:tint="#A2FFF5"
+            android:layout_margin="8dp"/>
+
+        <!-- Center Button (Globe) -->
+        <ImageButton
+            android:id="@+id/centerButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/chatbot_logo"
+            android:background="@android:color/transparent"
+
+            android:layout_margin="8dp"/>
+
+        <!-- Clock Button -->
+        <ImageButton
+            android:id="@+id/clockButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/clock"
+            android:background="@android:color/transparent"
+            app:tint="#A2FFF5"
+            android:layout_margin="8dp"/>
+
+        <!-- Grid Button -->
+        <ImageButton
+            android:id="@+id/gridButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/dashboard"
+            android:background="@android:color/transparent"
+            app:tint="#A2FFF5"
+            android:layout_margin="8dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

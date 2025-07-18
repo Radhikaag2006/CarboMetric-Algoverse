@@ -45,7 +45,7 @@ dependencies {
     // ✅ Firebase Authentication and Firestore (only necessary Firebase dependencies)
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.0")
-
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     // ✅ Material Design Components
     implementation("com.google.android.material:material:1.11.0")
 
